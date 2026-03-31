@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import axios      from 'axios'
+import axiosInstance from '../axiosinterceptor';
 import { useNavigate, Link } from 'react-router-dom'
 import Box        from '@mui/material/Box';
 import Button     from '@mui/material/Button';
@@ -20,7 +20,7 @@ const Login = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            const res = await axios.post('http://localhost:5000/user/login', inputs);
+            const res = await axiosInstance.post('/user/login', inputs);
             if (res.data.usertoken) {
                 localStorage.setItem('token',    res.data.usertoken);
                 localStorage.setItem('role',     res.data.role);

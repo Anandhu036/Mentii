@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import axios from 'axios'
+import axiosInstance from '../axiosinterceptor';
 import { useNavigate, Link } from 'react-router-dom'
 import Box            from '@mui/material/Box';
 import Button         from '@mui/material/Button';
@@ -90,7 +90,7 @@ const Register = () => {
         if (!validate()) return;
         setSubmitting(true);
         try {
-            await axios.post('http://localhost:5000/user/register', form);
+            await axiosInstance.post('/user/register', form);
             showToast('Account created! Please log in.');
             navigate('/login');
         } catch (err) {
@@ -108,8 +108,8 @@ const Register = () => {
         }
         setBioState('loading');
         try {
-            // Plain axios — this route is public, no token needed
-            const res = await axios.post('http://localhost:5000/ai/enhance-bio', {
+            
+            const res = await axiosInstance.post('/ai/enhance-bio', {
                 title:           form.title,
                 company:         form.company,
                 fieldOfWork:     form.fieldOfWork     || form.primaryExpertise,

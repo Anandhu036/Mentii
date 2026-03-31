@@ -14,6 +14,7 @@ app.use('/ai',      require('./routes/aiRoute'));
 
 app.get('/', (req, res) => res.json({ message: 'Mentii API is running' }));
 
-app.listen(process.env.PORT, () =>
-    console.log(`Mentii server running on PORT ${process.env.PORT}`)
-);
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`Mentii server running on PORT ${PORT}`);
+});
